@@ -14,11 +14,18 @@ public final class SyntaxClass {
 		SyntaxClass.println(() -> String.format("Hello, World! at %s", LocalDateTime.now()));
 
 		List<Integer> numbers = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
-		List<Integer> even1 = SyntaxClass.even(numbers, n -> n % 2 == 0);
-		List<Integer> even2 = SyntaxClass.even(numbers, n -> n % 2 == 0);
+		List<Integer> even1 = SyntaxClass.even(numbers, (Integer n) -> {
+			int mod = n % 2;
+			return mod == 0;
+		});
+		List<Integer> even2 = SyntaxClass.even(numbers, (Integer n) -> n % 2 == 0);
+		List<Integer> even3 = SyntaxClass.even(numbers, (n) -> n % 2 == 0);
+		List<Integer> even4 = SyntaxClass.even(numbers, n -> n % 2 == 0);
 
 		System.out.println(even1);
 		System.out.println(even2);
+		System.out.println(even3);
+		System.out.println(even4);
 
 		String separator = " ";
 		List<String> elements = Arrays.asList("Hello,", "World!", "by", "strut1", "and", "touwm1");
