@@ -27,6 +27,12 @@ public final class SyntaxClass {
 
 		System.out.println(joined1);
 		System.out.println(joined2);
+
+		UnaryInterface<Integer, Integer> square = x -> x * x;
+		System.out.println(square.execute(5));
+
+		BinaryInterface<Integer, Integer, Integer> sum = (x, y) -> x + y;
+		System.out.println(sum.execute(5, 7));
 	}
 
 	private static void println(NullaryInterface<String> message) {
