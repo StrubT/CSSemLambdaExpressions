@@ -1,6 +1,6 @@
 package ch.bfh.cssem.lambdaexpressions;
 
-public interface UnaryInterface {
+public interface UnaryInterface<I, O> {
 
-	Object execute(Object obj1);
+	O execute(I param1);
 }

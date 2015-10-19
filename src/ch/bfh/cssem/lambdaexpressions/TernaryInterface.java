@@ -1,6 +1,6 @@
 package ch.bfh.cssem.lambdaexpressions;
 
-public interface TernaryInterface {
+public interface TernaryInterface<I1, I2, I3, O> {
 
-	Object execute(Object obj1, Object obj2, Object obj3);
+	O execute(I1 param1, I2 param2, I3 param3);
 }

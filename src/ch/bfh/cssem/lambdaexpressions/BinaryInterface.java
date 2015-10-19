@@ -1,6 +1,6 @@
 package ch.bfh.cssem.lambdaexpressions;
 
-public interface BinaryInterface {
+public interface BinaryInterface<I1, I2, O> {
 
-	Object execute(Object obj1, Object obj2);
+	O execute(I1 param1, I2 param2);
 }

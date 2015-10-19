@@ -1,6 +1,6 @@
 package ch.bfh.cssem.lambdaexpressions;
 
-public interface NAryInterface {
+public interface NAryInterface<I, O> {
 
-	Object execute(Object... objects);
+	O execute(I... params);
 }

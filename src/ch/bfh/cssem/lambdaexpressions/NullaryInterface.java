@@ -1,6 +1,6 @@
 package ch.bfh.cssem.lambdaexpressions;
 
-public interface NullaryInterface {
+public interface NullaryInterface<O> {
 
-	Object execute();
+	O execute();
 }
