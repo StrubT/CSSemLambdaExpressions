@@ -3,13 +3,15 @@ package ch.bfh.cssem.lambdaexpressions;
 @FunctionalInterface
 public interface SampleInterface {
 
-	void abstractFunction();  // only one abstract function allowed
+	void abstractMethod();  // exactly one abstract method required / allowed
 
-	default void defaultFunction() {  // Java 8: default functions allowed
+	boolean equals(Object obj); // already defined in java.lang.Object, allowed
+
+	default void defaultMethod() {  // default methods allowed
 		System.out.println("Hello, World! by default function");
 	}
 
-	static void staticFunction() {  // Java 8: static functions allowed
+	static void staticMethod() {  // static methods allowed
 		System.out.println("Hello, World! by static function");
 	}
 }

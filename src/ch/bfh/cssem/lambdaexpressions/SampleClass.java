@@ -6,21 +6,21 @@ public final class SampleClass {
 
 	public static void main(String... args) {
 
-		SampleInterface.staticFunction();
+		SampleInterface.staticMethod();
 
-		SampleClass.myFunction(new SampleInterface() { // anonymous class (pre-Java 8)
+		SampleClass.myMethod(new SampleInterface() { // anonymous class (pre-Java 8)
 			@Override
-			public void abstractFunction() {
+			public void abstractMethod() {
 				System.out.println("Hello, World! by anonymous class");
 			}
 		});
 
-		SampleClass.myFunction(() -> System.out.println("Hello, World! by lambda expression")); // lambda expression (Java 8)
+		SampleClass.myMethod(() -> System.out.println("Hello, World! by lambda expression")); // lambda expression (Java 8)
 	}
 
-	private static void myFunction(SampleInterface sample) {
+	private static void myMethod(SampleInterface sample) {
 
-		sample.abstractFunction();
-		sample.defaultFunction();
+		sample.abstractMethod();
+		sample.defaultMethod();
 	}
 }
