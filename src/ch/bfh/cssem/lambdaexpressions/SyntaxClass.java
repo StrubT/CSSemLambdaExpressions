@@ -4,6 +4,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.BinaryOperator;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+import java.util.function.UnaryOperator;
 
 public final class SyntaxClass {
 
@@ -11,8 +15,8 @@ public final class SyntaxClass {
 
 	public static void main(String... args) {
 
-		NullaryInterface<SyntaxClass> constructor = SyntaxClass::new; // constructor reference
-		SyntaxClass instance = constructor.execute();
+		Supplier<SyntaxClass> constructor = SyntaxClass::new; // constructor reference
+		SyntaxClass instance = constructor.get();
 
 		SyntaxClass.println(() -> String.format("Hello, World! at %s", LocalDateTime.now()));
 
@@ -46,23 +50,23 @@ public final class SyntaxClass {
 		System.out.println(joined5);
 		System.out.println(joined6);
 
-		UnaryInterface<Integer, Integer> square = x -> x * x;
-		System.out.println(square.execute(5));
+		UnaryOperator<Integer> square = x -> x * x;
+		System.out.println(square.apply(5));
 
-		BinaryInterface<Integer, Integer, Integer> sum = (x, y) -> x + y;
-		System.out.println(sum.execute(5, 7));
+		BinaryOperator<Integer> sum = (x, y) -> x + y;
+		System.out.println(sum.apply(5, 7));
 	}
 
-	private static void println(NullaryInterface<String> message) {
+	private static void println(Supplier<String> message) {
 
-		System.out.println(message.execute());
+		System.out.println(message.get());
 	}
 
-	private static List<Integer> filter(List<Integer> numbers, UnaryInterface<Integer, Boolean> predicate) {
+	private static List<Integer> filter(List<Integer> numbers, Predicate<Integer> predicate) {
 
 		List<Integer> filtered = new ArrayList<>();
 		for (Integer number : numbers)
-			if (predicate.execute(number))
+			if (predicate.test(number))
 				filtered.add(number);
 
 		return filtered;
@@ -78,11 +82,11 @@ public final class SyntaxClass {
 		return String.format("%s %s", string1, string2);
 	}
 
-	private static String join(List<String> elements, BinaryInterface<String, String, String> joiner) {
+	private static String join(List<String> elements, BinaryOperator<String> joiner) {
 
 		String joined = !elements.isEmpty() ? elements.get(0) : null;
 		for (int i = 1; i < elements.size(); i++)
-			joined = joiner.execute(joined, elements.get(i));
+			joined = joiner.apply(joined, elements.get(i));
 
 		return joined;
 	}
