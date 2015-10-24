@@ -29,6 +29,7 @@ public class CollectionsClass {
 																		 .distinct()
 																		 .map(String::toUpperCase)
 																		 .filter(l -> l.startsWith("H"))
+																		 .sorted()
 																		 .skip(pageIndex * pageSize).limit(pageSize)
 																		 .collect(Collectors.toList());
 
