@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class CollectionsClass {
 
-	public static void main(String[] args) {
+	public static void main(String... args) {
 
 		List<Double> pointsToMarks = Arrays.asList(6.5, 9.75, 8.5, 3.0, 8.5, 10.0, 9.25, 8.78, 4.5, 5.5);
 		System.out.println(String.join(", ", pointsToMarks.stream().map(Object::toString).collect(Collectors.toList())));

@@ -7,7 +7,7 @@ import java.util.concurrent.Future;
 
 public class ConcurrencyClass {
 
-	public static void main(String[] args) {
+	public static void main(String... args) {
 
 		String threadName0 = Thread.currentThread().getName(); // Get name of main Thread
 		System.out.println("Hello " + threadName0);
