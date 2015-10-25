@@ -1,13 +1,27 @@
 package ch.bfh.cssem.lambdaexpressions;
 
+/**
+ * Class with tests for the {@link SampleInterface}.
+ *
+ * @author strut1 &amp; touwm1
+ */
 public final class SampleClass {
 
 	private SampleClass() {}
 
+	/**
+	 * Main method / entry point to the application.
+	 * Runs the tests.
+	 *
+	 * @param args command-line arguments (none used)
+	 */
 	public static void main(String... args) {
 		new SampleClass().run();
 	}
 
+	/**
+	 * Runs the tests.
+	 */
 	public void run() {
 
 		SampleInterface.printHelloWorldStatic();

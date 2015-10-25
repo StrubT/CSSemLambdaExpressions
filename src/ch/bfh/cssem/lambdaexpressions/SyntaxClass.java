@@ -9,10 +9,21 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
+/**
+ * Class with syntactical tests.
+ *
+ * @author strut1 &amp; touwm1
+ */
 public final class SyntaxClass {
 
 	private SyntaxClass() {}
 
+	/**
+	 * Main method / entry point to the application.
+	 * Runs the tests.
+	 *
+	 * @param args command-line arguments (none used)
+	 */
 	public static void main(String... args) {
 
 		Supplier<SyntaxClass> constructor = SyntaxClass::new; // constructor reference
