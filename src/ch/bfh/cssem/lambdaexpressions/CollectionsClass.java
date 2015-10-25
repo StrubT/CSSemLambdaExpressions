@@ -8,8 +8,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Class with tests for the {@link Collection} framework.
+ *
+ * @author strut1 &amp; touwm1
+ */
 public class CollectionsClass {
 
+	/**
+	 * Main method / entry point to the application.
+	 * Runs the tests.
+	 *
+	 * @param args command-line arguments (none used)
+	 */
 	public static void main(String... args) {
 
 		List<Double> pointsToMarks = Arrays.asList(6.5, 9.75, 8.5, 3.0, 8.5, 10.0, 9.25, 8.78, 4.5, 5.5);
