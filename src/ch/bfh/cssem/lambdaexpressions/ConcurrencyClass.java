@@ -87,7 +87,7 @@ public class ConcurrencyClass {
 			public String call() {
 				String threadName = Thread.currentThread().getName(); // get name of main thread inside callable
 				System.out.printf("Hello! from callable anonymous class on thread %s%n", threadName);
-				return "return value from callable anonymous class"; //return value to caller
+				return "return value from callable anonymous class"; // return value to caller
 			}
 		};
 
@@ -115,7 +115,7 @@ public class ConcurrencyClass {
 			public String call() throws Exception {
 				String threadName = Thread.currentThread().getName(); // get name of pool thread
 				System.out.printf("Hello! from future 1 on pool 1 on thread %s%n", threadName);
-				return "return value from future 1 in pool 1"; //return value to caller
+				return "return value from future 1 in pool 1"; // return value to caller
 			}
 		});
 
@@ -133,13 +133,13 @@ public class ConcurrencyClass {
 		Future<?> future22 = executor2.submit(() -> {
 			String threadName = Thread.currentThread().getName();
 			System.out.printf("Hello! from future 2 in pool 2 on thread %s%n", threadName);
-		}); //no return value
+		}); // no return value
 
 		try {
 			System.out.printf(">%s%n", future11.get());
 			System.out.printf(">%s%n", future12.get());
 			System.out.printf(">%s%n", future21.get());
-			System.out.printf(">%s%n", future22.get());
+			System.out.printf(">%s%n", future22.get()); // will always be null
 
 		} catch (ExecutionException | InterruptedException ex) {
 			System.out.printf("cannot get future values: %s%n", ex);
