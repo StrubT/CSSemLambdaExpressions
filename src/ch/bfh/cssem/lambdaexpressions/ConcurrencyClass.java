@@ -1,5 +1,6 @@
 package ch.bfh.cssem.lambdaexpressions;
 
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -20,34 +21,128 @@ public class ConcurrencyClass {
 	 */
 	public static void main(String... args) {
 
-		String threadName0 = Thread.currentThread().getName(); // get name of main thread
-		System.out.println("Hello " + threadName0);
+		// *** PROCEDURAL ***
 
-		Thread th1 = new Thread(() -> {
-			String threadName1 = Thread.currentThread().getName(); // get name of thread 1
-			System.out.println("Hello " + threadName1);
-		});
+		String threadNameMain = Thread.currentThread().getName(); // get name of main thread
+		System.out.printf("Hello! from procedural call on thread %s%n", threadNameMain);
 
-		Thread th2 = new Thread(() -> {
-			String threadName2 = Thread.currentThread().getName(); // get name of thread 2
-			System.out.println("Hello " + threadName2);
-		});
+		// *** RUNNABLE ***
 
-		th1.start();
-		th2.start();
+		Runnable runnableAnonymous = new Runnable() { // create an anonymous class implementing the interface
+			@Override
+			public void run() {
+				String threadName = Thread.currentThread().getName(); // get name of main thread inside runnable
+				System.out.printf("Hello! from runnable anonymous class on thread %s%n", threadName);
+			}
+		};
 
-		ExecutorService executor = Executors.newSingleThreadExecutor(); // create ExecutorService (thread pool)
-		Future<String> future = executor.submit(() -> { // create Future in pool
+		Runnable runnableLambda = () -> { // create a lambda expression "implementing" the interface
 			String threadName = Thread.currentThread().getName();
-			System.out.println("Hello " + threadName);
-			return "Return from Future";
+			System.out.printf("Hello! from runnable lambda expression on thread %s%n", threadName);
+		};
+
+		runnableAnonymous.run();
+		runnableLambda.run();
+
+		// *** THREAD ***
+
+		Thread threadAnonymousExtended = new Thread() { // create an anonymous class extending the class
+			@Override
+			public void run() {
+				String threadName = Thread.currentThread().getName(); // get name of thread
+				System.out.printf("Hello! from extended thread %s%n", threadName);
+			}
+		};
+
+		Thread threadAnonymousImplemented = new Thread(new Runnable() { // create an anonymous class implementing the interface
+			@Override
+			public void run() {
+				String threadName = Thread.currentThread().getName();
+				System.out.printf("Hello! from thread with runnable anonymous class %s%n", threadName);
+			}
 		});
+
+		Thread threadLambda = new Thread(() -> { // create a lambda expression "implementing" the interface
+			String threadName = Thread.currentThread().getName();
+			System.out.printf("Hello! from thread with runnable lambda expression %s%n", threadName);
+		});
+
+		threadAnonymousExtended.start();
+		threadAnonymousImplemented.start();
+		threadLambda.start();
 
 		try {
-			System.out.println(future.get());
+			threadAnonymousExtended.join();
+			threadAnonymousImplemented.join();
+			threadLambda.join();
+
+		} catch (InterruptedException ex) {
+			System.out.printf("cannot join threads: %s%n", ex);
+		}
+
+		// *** CALLABLE ***
+
+		Callable<String> callableAnonymous = new Callable<String>() { // create an anonymous class implementing the interface
+			@Override
+			public String call() {
+				String threadName = Thread.currentThread().getName(); // get name of main thread inside callable
+				System.out.printf("Hello! from callable anonymous class on thread %s%n", threadName);
+				return "return value from callable anonymous class"; //return value to caller
+			}
+		};
+
+		Callable<String> callableLambda = () -> { // create a lambda expression "implementing" the interface
+			String threadName = Thread.currentThread().getName();
+			System.out.printf("Hello! from callable lambda expression on thread %s%n", threadName);
+			return "return value from callable lambda expression";
+		};
+
+		try {
+			System.out.printf(">%s%n", callableAnonymous.call());
+			System.out.printf(">%s%n", callableLambda.call());
+
+		} catch (Exception ex) {
+			System.out.printf("cannot call callable: %s%n", ex);
+		}
+
+		// *** FUTURE ***
+
+		ExecutorService executor1 = Executors.newSingleThreadExecutor(); // create ExecutorService (managing single thread)
+		ExecutorService executor2 = Executors.newCachedThreadPool(); // create ExecutorService (cached thread pool)
+
+		Future<String> future11 = executor1.submit(new Callable<String>() { // create Future in pool
+			@Override
+			public String call() throws Exception {
+				String threadName = Thread.currentThread().getName(); // get name of pool thread
+				System.out.printf("Hello! from future 1 on pool 1 on thread %s%n", threadName);
+				return "return value from future 1 in pool 1"; //return value to caller
+			}
+		});
+
+		Future<String> future12 = executor1.submit(() -> {
+			String threadName = Thread.currentThread().getName();
+			System.out.printf("Hello! from future 2 in pool 1 on thread %s%n", threadName);
+			return "return value from future 2 in pool 1";
+		});
+
+		Future<String> future21 = executor2.submit(() -> {
+			String threadName = Thread.currentThread().getName();
+			System.out.printf("Hello! from future 1 in pool 2 on thread %s%n", threadName);
+		}, "return value from future 2 in pool 2");
+
+		Future<?> future22 = executor2.submit(() -> {
+			String threadName = Thread.currentThread().getName();
+			System.out.printf("Hello! from future 2 in pool 2 on thread %s%n", threadName);
+		}); //no return value
+
+		try {
+			System.out.printf(">%s%n", future11.get());
+			System.out.printf(">%s%n", future12.get());
+			System.out.printf(">%s%n", future21.get());
+			System.out.printf(">%s%n", future22.get());
 
 		} catch (ExecutionException | InterruptedException ex) {
-			ex.printStackTrace();
+			System.out.printf("cannot get future values: %s%n", ex);
 		}
 	}
 }
