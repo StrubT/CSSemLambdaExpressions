@@ -24,23 +24,46 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
+/**
+ * Class with tests for the JavaFX framework.
+ *
+ * @author strut1 &amp; touwm1
+ */
 public class JavaFXClass extends Application {
 
+	/**
+	 * Main method / entry point to the application.
+	 * Runs the tests.
+	 *
+	 * @param args command-line arguments (none used)
+	 */
 	public static void main(String... args) {
 
 		Application.launch(args);
 	}
 
+	/** Minimum with of the JavaFX window in pixels. */
 	public static final double MIN_WIDTH = 350.;
+
+	/** Maximum with of the JavaFX window in pixels. */
 	public static final double MAX_WIDTH = 500.;
 
+	/** Minimum with of the JavaFX height in pixels. */
 	public static final double MIN_HEIGHT = 250.;
+
+	/** Maximum with of the JavaFX height in pixels. */
 	public static final double MAX_HEIGHT = JavaFXClass.MAX_WIDTH;
 
+	/** Minimum duration of an async task in seconds. */
 	public static final int ASYNC_SECONDS_MIN = 1;
+
+	/** Duration after which a async task is aborted (in seconds). */
 	public static final int ASYNC_SECONDS_ABORT = 3;
+
+	/** Maximum duration of an async task in seconds. */
 	public static final int ASYNC_SECONDS_MAX = 5;
 
+	/** Format to use when displaying times. */
 	public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss");
 
 	private final GridPane layout;
@@ -55,6 +78,9 @@ public class JavaFXClass extends Application {
 	private final Button asyncButton;
 	private final Label asyncLabel;
 
+	/**
+	 * Construct a new instance and create all JavaFX controls.
+	 */
 	public JavaFXClass() {
 
 		this.layout = new GridPane();
@@ -79,6 +105,10 @@ public class JavaFXClass extends Application {
 		this.asyncButton.setOnAction(this::asyncButtonHandler);
 	}
 
+	/**
+	 * Entry point for the JavaFX application.
+	 * Configure &amp; show the stage.
+	 */
 	@Override
 	public void start(Stage primaryStage) {
 

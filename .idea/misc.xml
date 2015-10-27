@@ -15,7 +15,7 @@
     <option name="OPTION_DOCUMENT_TAG_VERSION" value="true" />
     <option name="OPTION_DOCUMENT_TAG_DEPRECATED" value="true" />
     <option name="OPTION_DEPRECATED_LIST" value="true" />
-    <option name="OTHER_OPTIONS" value="-windowtitle &quot;CSSem Lambda Expression in Java 8&quot; -doctitle &quot;CSSem Lambda Expression in Java 8&quot; -linksource -link http://docs.oracle.com/javase/8/docs/api/" />
+    <option name="OTHER_OPTIONS" value="-windowtitle &quot;CSSem Lambda Expression in Java 8&quot; -doctitle &quot;CSSem Lambda Expression in Java 8&quot; -linksource -link http://docs.oracle.com/javase/8/docs/api/ -link http://docs.oracle.com/javase/8/javafx/api/" />
     <option name="HEAP_SIZE" />
     <option name="LOCALE" value="en_GB" />
     <option name="OPEN_IN_BROWSER" value="true" />
