@@ -13,7 +13,9 @@ import java.util.stream.Collectors;
  *
  * @author strut1 &amp; touwm1
  */
-public class CollectionsClass {
+public final class CollectionsClass {
+
+	private CollectionsClass() {}
 
 	/**
 	 * Main method / entry point to the application.

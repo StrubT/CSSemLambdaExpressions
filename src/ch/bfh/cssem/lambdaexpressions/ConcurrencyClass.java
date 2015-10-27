@@ -11,7 +11,9 @@ import java.util.concurrent.Future;
  *
  * @author strut1 &amp; touwm1
  */
-public class ConcurrencyClass {
+public final class ConcurrencyClass {
+
+	private ConcurrencyClass() {}
 
 	/**
 	 * Main method / entry point to the application.
