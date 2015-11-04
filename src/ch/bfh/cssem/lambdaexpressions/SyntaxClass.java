@@ -16,7 +16,10 @@ import java.util.function.UnaryOperator;
  */
 public final class SyntaxClass {
 
-	private SyntaxClass() {}
+	private SyntaxClass() {
+
+		System.out.println("SyntaxClass initialised!");
+	}
 
 	/**
 	 * Main method / entry point to the application.
@@ -26,8 +29,19 @@ public final class SyntaxClass {
 	 */
 	public static void main(String... args) {
 
-		Supplier<SyntaxClass> constructor = SyntaxClass::new; // constructor reference
-		SyntaxClass instance = constructor.get();
+		new SyntaxClass(); // immediate construction
+		Supplier<SyntaxClass> constructor1 = SyntaxClass::new; // constructor reference
+		Supplier<SyntaxClass> constructor2 = () -> new SyntaxClass(); // equivalent lambda expression
+		Supplier<SyntaxClass> constructor3 = new Supplier<SyntaxClass>() { // equivalent anonymous class
+			@Override
+			public SyntaxClass get() {
+				return new SyntaxClass();
+			}
+		};
+
+		SyntaxClass instance1 = constructor1.get();
+		SyntaxClass instance2 = constructor2.get();
+		SyntaxClass instance3 = constructor3.get();
 
 		SyntaxClass.println(() -> String.format("Hello, World! at %s", LocalDateTime.now()));
 
@@ -49,7 +63,7 @@ public final class SyntaxClass {
 		List<String> elements = Arrays.asList("Hello,", "World!", "by", "strut1", "and", "touwm1");
 		String joined1 = SyntaxClass.join(elements, (String a, String b) -> a + separator + b);
 		String joined2 = SyntaxClass.join(elements, (a, b) -> a + separator + b);
-		String joined3 = SyntaxClass.join(elements, instance::joinInstance); // instance method
+		String joined3 = SyntaxClass.join(elements, instance1::joinInstance); // instance method
 		String joined4 = SyntaxClass.join(elements, SyntaxClass::joinStatic); // static method
 		String joined5 = SyntaxClass.join(elements, String::concat); // instance method (special handling)
 		String joined6 = SyntaxClass.join(elements, (_this, str) -> _this.concat(str));
